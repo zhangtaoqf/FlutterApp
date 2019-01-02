@@ -1,6 +1,6 @@
 # qsbk_flutter
 
-是一个用flutter写的糗事百科的项目
+用Flutter写了一个app，里面包括各种高效段子，文章，视频，图片。包含的技术点有：Navigator，BottomNavigatorBar，ViewPager，VideoView，Future的delay属性等。是一个不错的项目，里面添加了详细的注释。和方法说明。适合Flutter的初学者和项目实战的同学学习和借鉴。
 
 ## Getting Started
 
