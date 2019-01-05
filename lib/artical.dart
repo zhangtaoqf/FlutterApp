@@ -22,6 +22,7 @@ class ArticalListWidgetState extends State<ArticalListWidget>
     with SingleTickerProviderStateMixin {
   List<dynamic> data;
   http.Client client;
+
   @override
   void initState() {
     super.initState();
@@ -61,19 +62,22 @@ class ArticalListWidgetState extends State<ArticalListWidget>
 
   void loadData() {
     client = new http.Client();
-    client.get("https://m2.qiushibaike.com/article/list/text").then((response) {
-      //dynamic 类似于JSONArray类型
-      if (response.statusCode == 200) {
-        dynamic dataJS = json.decode(response.body);
-        print(response.body);
-        data = dataJS["items"];
-        //更新界面
-        setState(() {});
-      }
-    }).catchError(dealError)
+    client
+        .get("https://m2.qiushibaike.com/article/list/text")
+        .then((response) {
+          //dynamic 类似于JSONArray类型
+          if (response.statusCode == 200) {
+            dynamic dataJS = json.decode(response.body);
+            print(response.body);
+            data = dataJS["items"];
+            //更新界面
+            setState(() {});
+          }
+        })
+        .catchError(dealError)
         .whenComplete(() {
-      client.close;
-    });
+          client.close;
+        });
   }
 
   Widget getItemWidget(map) {
@@ -91,11 +95,11 @@ class ArticalListWidgetState extends State<ArticalListWidget>
                 margin: EdgeInsets.all(5),
                 width: 30,
                 height: 30,
-                child: map["user"] != null && map["user"]["thumb"] != null
-                    ? FadeInImage.assetNetwork(
-                        placeholder: "images/splash.jpg",
-                        image: map["user"]["thumb"])
-                    : Container(),
+                child: new ClipOval(
+                  child: map["user"] != null && map["user"]["thumb"] != null
+                      ? Image.network(map["user"]["thumb"])
+                      : Container(),
+                ),
               ),
               Text(
                 map["user"] != null && map["user"]["login"] != null

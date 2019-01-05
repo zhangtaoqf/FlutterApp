@@ -100,9 +100,11 @@ class PicListWidgetState extends State<PicListWidget>
                 margin: EdgeInsets.all(5),
                 width: 30,
                 height: 30,
-                child: map["user"] != null && map["user"]["thumb"] != null
-                    ? Image.network(map["user"]["thumb"])
-                    : Container(),
+                child: new ClipOval(
+                  child: map["user"] != null && map["user"]["thumb"] != null
+                      ? Image.network(map["user"]["thumb"])
+                      : Container(),
+                ),
               ),
               Text(
                 map["user"] != null && map["user"]["login"] != null
